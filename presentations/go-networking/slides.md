@@ -9,11 +9,6 @@ favicon: https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo\_Blue.png
 
 # Redes con Go (TCP/UDP)
 
-* Meta: entender **intuitivamente** redes y protocolos con Go
-* Combina **conceptos** + **código**
-* Enfoque **multiplataforma** (Linux/Mac/Windows)
-* De estándar → a librerías externas
-
 ---
 
 # Agenda (mini)
@@ -29,45 +24,45 @@ favicon: https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo\_Blue.png
 
 # Fundamentos rápidos
 
-* IP = “dirección” del host
-* **Puerto** (0–65535) = servicio en el host
-* **Socket** = IP\:PUERTO (extremo de comunicación)
-* **Cliente/Servidor**: cliente inicia, servidor escucha
+* <span v-mark>IP</span> = "dirección" del host
+* <span v-mark="1">**Puerto**</span> (0–65535) = servicio en el host
+* <span v-mark="2" v-mark.highlight.yellow>**Socket**</span> = IP\:PUERTO (extremo de comunicación)
+* <span v-mark="3">**Cliente/Servidor**</span>: cliente inicia, servidor escucha
 
 ---
 
 # TCP vs UDP
 
-* **TCP**: conexión, fiable, ordenado (stream de bytes)
-* **UDP**: sin conexión, sin garantías, **rápido** (datagramas)
-* Elige TCP para **integridad**; UDP para **latencia**
+* <span v-mark.box.blue>**TCP**</span>: conexión, fiable, ordenado (stream de bytes)
+* <span v-mark="1" v-mark.box.green>**UDP**</span>: sin conexión, sin garantías, <span v-mark="2" v-mark.underline.red>**rápido**</span> (datagramas)
+* Elige TCP para <span v-mark="3" v-mark.highlight.yellow>**integridad**</span>; UDP para <span v-mark="4" v-mark.highlight.orange>**latencia**</span>
 
 ---
 
 # Handshake TCP (3 pasos)
 
-1. Cliente → **SYN**
-2. Servidor → **SYN-ACK**
-3. Cliente → **ACK**
-   → Canal listo para enviar **stream** de bytes
+1. <span v-mark>Cliente → **SYN**</span>
+2. <span v-mark="1">Servidor → **SYN-ACK**</span>
+3. <span v-mark="2">Cliente → **ACK**</span>
+   → <span v-mark="3" v-mark.highlight.green>Canal listo para enviar **stream** de bytes</span>
 
 ---
 
 # Paquetes Go clave
 
-* `net`: TCP/UDP, DNS, `Dial`/`Listen`/`Accept`
-* `net/http`: servidor/cliente HTTP sencillo
-* `net/url`: parseo/armado seguro de URLs
+* <span v-mark.underline.blue>`net`</span>: TCP/UDP, DNS, `Dial`/`Listen`/`Accept`
+* <span v-mark="1" v-mark.underline.green>`net/http`</span>: servidor/cliente HTTP sencillo
+* <span v-mark="2" v-mark.underline.orange>`net/url`</span>: parseo/armado seguro de URLs
 
 ---
 
 # Patrón servidor TCP (flujo)
 
-* `Listen("tcp", ":puerto")`
-* `Accept()` en bucle
-* 1 goroutine por cliente
-* `Read`/`Write` sobre `net.Conn`
-* Cerrar al terminar
+* <span v-mark>`Listen("tcp", ":puerto")`</span>
+* <span v-mark="1">`Accept()` en bucle</span>
+* <span v-mark="2" v-mark.highlight.yellow>1 goroutine por cliente</span>
+* <span v-mark="3">`Read`/`Write` sobre `net.Conn`</span>
+* <span v-mark="4" v-mark.underline.red>Cerrar al terminar</span>
 
 ---
 
@@ -101,10 +96,10 @@ func main() {
 
 # Cliente TCP (flujo)
 
-* `Dial("tcp", "host:puerto")`
-* Leer stdin / escribir al socket
-* Leer respuestas en goroutine
-* Cerrar con `Close()`
+* <span v-mark>`Dial("tcp", "host:puerto")`</span>
+* <span v-mark="1">Leer stdin / escribir al socket</span>
+* <span v-mark="2" v-mark.highlight.yellow>Leer respuestas en goroutine</span>
+* <span v-mark="3" v-mark.underline.red>Cerrar con `Close()`</span>
 
 ---
 
@@ -140,10 +135,10 @@ func main() {
 
 # UDP (ideas clave)
 
-* **No hay** `Accept()`
-* `ListenUDP`/`ReadFromUDP`/`WriteToUDP`
-* Tamaño de datagrama limitado
-* Usa **timeouts** (`SetReadDeadline`)
+* <span v-mark v-mark.underline.red>**No hay** `Accept()`</span>
+* <span v-mark="1">`ListenUDP`/`ReadFromUDP`/`WriteToUDP`</span>
+* <span v-mark="2" v-mark.highlight.yellow>Tamaño de datagrama limitado</span>
+* <span v-mark="3" v-mark.box.red>Usa **timeouts** (`SetReadDeadline`)</span>
 
 ---
 
@@ -281,10 +276,10 @@ fmt.Println(u.String())
 
 # Chat TCP (idea)
 
-* Mantén `[]Conn` activos
-* 1 goroutine por cliente
-* **Broadcast** al resto
-* Sin bloquear escritura/lectura
+* <span v-mark>Mantén `[]Conn` activos</span>
+* <span v-mark="1" v-mark.highlight.yellow>1 goroutine por cliente</span>
+* <span v-mark="2" v-mark.underline.blue>**Broadcast** al resto</span>
+* <span v-mark="3" v-mark.box.red>Sin bloquear escritura/lectura</span>
 
 ---
 
@@ -310,8 +305,8 @@ func broadcast(sender net.Conn, msg string) {
 
 * Servidor recibe y **guarda**
 * Cliente **lee** archivo y envía
-* `io.Copy` simplifica mucho
-* Un archivo por conexión
+* <span v-mark v-mark.highlight.green>`io.Copy` simplifica mucho</span>
+* <span v-mark="1">Un archivo por conexión</span>
 
 ---
 
@@ -427,10 +422,10 @@ for {
 
 # WebSockets (en Go)
 
-* Full-duplex sobre HTTP
+* <span v-mark>Full-duplex sobre HTTP</span>
 * Ideal: chat, dashboards, colab
-* Librerías: **nhooyr/websocket**, gobwas/ws
-* Alternativa: gRPC streaming
+* Librerías: <span v-mark="1" v-mark.underline.green>**nhooyr/websocket**</span>, gobwas/ws
+* Alternativa: <span v-mark="2">gRPC streaming</span>
 
 ---
 
@@ -477,9 +472,9 @@ nc.Publish("sensors.temp", []byte("22.5"))
 
 # RPC moderno (gRPC)
 
-* Esquemas **protobuf**
-* HTTP/2, binario, *streaming*
-* Tipado fuerte cliente/servidor
+* <span v-mark>Esquemas **protobuf**</span>
+* <span v-mark="1">HTTP/2, binario, *streaming*</span>
+* <span v-mark="2" v-mark.highlight.yellow>Tipado fuerte cliente/servidor</span>
 * Ideal microservicios internos
 
 ---
@@ -528,21 +523,21 @@ func main() {
 
 # Buenas prácticas
 
-* 1 goroutine por conexión (TCP)
-* **Timeouts/Deadlines** siempre
-* Reintentos (UDP/MQTT)
-* Maneja cerrados/errores con cuidado
-* Testea bajo carga
+* <span v-mark.highlight.yellow>1 goroutine por conexión (TCP)</span>
+* <span v-mark="1" v-mark.underline.red>**Timeouts/Deadlines** siempre</span>
+* <span v-mark="2">Reintentos (UDP/MQTT)</span>
+* <span v-mark="3" v-mark.underline.orange>Maneja cerrados/errores con cuidado</span>
+* <span v-mark="4">Testea bajo carga</span>
 
 ---
 
 # Errores comunes
 
-* Bloquear el `Accept()`/lecturas
-* No cerrar `Conn()`/`Body`
-* Compartir mapas sin mutex
-* Leer **líneas** y olvidar `\n`
-* No validar entrada del usuario
+* <span v-mark.box.red>Bloquear el `Accept()`/lecturas</span>
+* <span v-mark="1" v-mark.box.red>No cerrar `Conn()`/`Body`</span>
+* <span v-mark="2" v-mark.highlight.yellow>Compartir mapas sin mutex</span>
+* <span v-mark="3">Leer **líneas** y olvidar `\n`</span>
+* <span v-mark="4" v-mark.underline.red>No validar entrada del usuario</span>
 
 ---
 
