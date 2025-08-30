@@ -20,14 +20,14 @@ Notas del presentador: Dar la bienvenida a la clase y presentar el tema. Mencion
 - <span class="border-2 border-green-500 rounded px-2 py-0.5">**Recursos adicionales**</span>: Para continuar aprendiendo  
 - <span class="bg-lime-200 px-2 rounded">**Ejercicios prácticos**</span> en cada sección
 
-</v-clicks>  
-<!-- 
+</v-clicks>
+<!--
 Notas del presentador: Dar un repaso de los puntos que cubriremos. Mencionar que empezaremos por la sintaxis básica, luego repasaremos los tipos de datos disponibles en Go, hablaremos sobre el sistema de tipos (incluyendo interfaces y genéricos), veremos cómo Go se puede integrar con otros entornos (C y WebAssembly), y finalmente compartiremos recursos. Destacar que después de cada sección habrá un ejercicio para practicar.
 -->
 
 ---
 
-## Sintaxis Básica  
+## Sintaxis Básica
 
 ### <span v-click class="underline decoration-4 decoration-blue-500">¿Qué hace especial a Go?</span>
 
