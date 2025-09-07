@@ -1002,765 +1002,43 @@ transition: slide-left
 
 ---
 layout: center
----
-
-# Containers & Kubernetes
-## El estándar de la industria
-
-<div class="text-xl mt-8">
-
-<v-clicks>
-
-Los contenedores encapsulan tu aplicación Go y sus dependencias
-
-Kubernetes orquesta y gestiona estos contenedores a escala
-
-Es el estándar de facto para aplicaciones cloud-native
-
-</v-clicks>
-
-</div>
-
----
-
-# Dockerfile para Go
-
-### Ventajas de containerizar aplicaciones Go
-
-<v-clicks>
-
-- **Portabilidad total**: Funciona igual en cualquier ambiente
-- **Imagen mínima**: Go compila a binario estático (~10MB)
-- **Rápido arranque**: Sin JVM ni interpretes (< 1s)
-- **Fácil distribución**: Un solo artefacto inmutable
-- **Aislamiento**: Cada servicio en su contenedor
-
-</v-clicks>
-
-<v-click>
-
-### Mejores prácticas
-
-- Usar multi-stage builds
-- Imágenes desde scratch o alpine
-- Compilar con CGO_ENABLED=0
-- No ejecutar como root
-
-</v-click>
-
-<v-click>
-
-<div class="mt-4 grid grid-cols-2 gap-4">
-
-<div>
-**Imagen final**: ~10MB
-</div>
-
-<div>
-**Startup time**: <1s
-</div>
-
-</div>
-
-</v-click>
-
----
-
-# Kubernetes
-## Orquestación de Contenedores
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div v-click>
-
-### Ventajas
-- Orquestación automática
-- Auto-healing y scaling
-- Service discovery
-- Rolling updates
-- Rico ecosistema
-
-</div>
-
-<div v-click>
-
-### Desventajas
-- Alta complejidad
-- Curva empinada
-- Overhead para MVPs
-- Requiere DevOps
-- Costo mínimo alto
-
-</div>
-
-</div>
-
----
-
-# Kubernetes: ¿Realmente lo necesitas?
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-## Sí, si tienes:
-
-<v-clicks>
-
-- 10+ microservicios
-- Equipo DevOps dedicado
-- Necesidad de orquestación compleja
-- Presupuesto para la curva de aprendizaje
-
-</v-clicks>
-
-</div>
-
-<div>
-
-## No, si:
-
-<v-clicks>
-
-- Es tu primer proyecto
-- Tienes 1-3 servicios
-- Equipo pequeño (<5 devs)
-- Presupuesto limitado
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<v-click>
-
-<div class="mt-8 p-4 bg-orange-500 bg-opacity-10 rounded text-center">
-<span v-mark.highlight.yellow>"No uses Kubernetes porque Google lo usa. Úsalo cuando tengas problemas similares a Google"</span>
-</div>
-
-</v-click>
-
----
-
-# Platform as a Service
-## Deploy en minutos, no días
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div v-click>
-
-### Ventajas
-- Deploy con git push
-- Sin servidores
-- SSL automático
-- CI/CD integrado
-- Add-ons fáciles
-
-</div>
-
-<div v-click>
-
-### Desventajas
-- Menos control
-- Costo premium
-- Límites de plataforma
-- Vendor lock-in
-- Menos optimización
-
-</div>
-
-</div>
-
----
-layout: two-cols
----
-
-# PaaS: Opciones Populares
-
-<v-clicks>
-
-### Heroku
-- Deploy con git push
-- Buildpacks automáticos para Go
-- Add-ons marketplace
-- $7/mes plan básico
-
-### Render
-- Alternativa moderna a Heroku
-- Free tier disponible
-- Auto-deploy desde GitHub
-- SSL automático
-
-</v-clicks>
-
-::right::
-
-<v-click>
-
-### Railway
-- Detección automática de Go
-- Deploy instantáneo
-- Variables de entorno fáciles
-- Pricing por uso
-
-</v-click>
-
-<v-click>
-
-### Fly.io
-- Deploy global en múltiples regiones
-- Contenedores en Firecracker VMs
-- Escala automáticamente
-- $5 crédito mensual gratis
-
-</v-click>
-
-<v-click>
-
-<div class="mt-8 p-3 bg-green-500 bg-opacity-10 rounded">
-**Perfecto para**: MVPs, startups, prototipos
-</div>
-
-</v-click>
-
----
-
-# Serverless: El futuro es sin servidor
-
-<div class="mt-8">
-
-### Características principales
-
-<v-clicks>
-
-- **Pago por uso real**: $0 cuando no hay tráfico
-- **Escalamiento automático**: De 0 a miles de instancias
-- **Sin gestión de servidores**: El proveedor maneja todo
-- **Alta disponibilidad**: Multi-AZ por defecto
-- **Ideal para Go**: Cold starts rápidos (~100ms)
-
-</v-clicks>
-
-<v-click>
-
-### Opciones principales
-
-- **AWS Lambda**: Líder del mercado, gran ecosistema
-- **Google Cloud Functions**: Integración con GCP
-- **Azure Functions**: Requiere custom handlers para Go
-- **Cloudflare Workers**: Requiere compilar a WASM
-
-</v-click>
-
-</div>
-
-<v-click>
-
-<div class="grid grid-cols-3 gap-4 mt-8">
-
-<div class="text-center">
-<div class="text-3xl">Costo</div>
-**$0** cuando no hay tráfico
-</div>
-
-<div class="text-center">
-<div class="text-3xl">Escalabilidad</div>
-Escala a **miles** de requests/seg
-</div>
-
-<div class="text-center">
-<div class="text-3xl">Velocidad</div>
-Cold start Go: **~100ms**
-</div>
-
-</div>
-
-</v-click>
-
----
-
-# Google Cloud Run
-## Lo mejor de ambos mundos
-
-<v-clicks>
-
-- **Containers** pero sin Kubernetes
-- **Serverless** pricing (scale to zero)
-- **Global** con un comando
-- **Simple** como PaaS
-
-</v-clicks>
-
-<v-click>
-
-### Características clave
-- Deploy en 2 comandos simples
-- Autoscaling de 0 a miles de instancias
-- HTTPS automático incluido
-- Integración con CI/CD de Google
-
-</v-click>
-
-<v-click>
-
-<div class="mt-8 grid grid-cols-2 gap-4">
-
-<div class="p-4 bg-blue-500 bg-opacity-10 rounded">
-**Free tier generoso**
-- 2M requests/mes
-- 360,000 GB-segundos
-- 180,000 vCPU-segundos
-</div>
-
-<div class="p-4 bg-green-500 bg-opacity-10 rounded">
-**Ideal para**
-- APIs REST
-- Webhooks
-- Microservicios
-- Sites dinámicos
-</div>
-
-</div>
-
-</v-click>
-
----
-layout: center
----
-
-# I/O Bound vs CPU Bound
-## La clave para elegir dónde deployar
-
-<v-clicks>
-
-### ¿Por qué importa?
-
-El tipo de carga de tu aplicación Go determina:
-- Qué recursos necesitas optimizar
-- Cuánto pagarás en la nube
-- Qué plataforma te dará mejor performance
-
-### La gran ventaja de Go
-
-Go fue diseñado para I/O concurrente con goroutines
-- Millones de goroutines con poca memoria
-- Modelo CSP (Communicating Sequential Processes)
-- Perfect para microservicios y APIs
-
-</v-clicks>
-
----
-
-# I/O Bound: Esperando al mundo
-
-<v-clicks>
-
-- La mayor parte del tiempo **esperando**
-- Base de datos queries
-- Llamadas a APIs externas
-- Lectura/escritura de archivos
-- WebSockets y streaming
-
-</v-clicks>
-
----
-
-# I/O Bound: Ejemplos en Go
-
-<v-clicks>
-
-- API REST que consulta PostgreSQL
-- Proxy/Gateway que llama otros servicios
-- Chat server con WebSockets
-- Servicio de uploads a S3
-- Web scraper
-
-</v-clicks>
-
----
-
-# I/O Bound: Lo que necesitas
-
-<v-clicks>
-
-- **Muchas conexiones concurrentes**
-- **Baja latencia de red**
-- **No mucho CPU**
-
-</v-clicks>
-
----
-
-# CPU Bound: Calculando sin parar
-
-<v-clicks>
-
-- Uso intensivo del procesador
-- Cálculos matemáticos complejos
-- Procesamiento de datos
-- Transformaciones pesadas
-- Algoritmos computacionales
-
-</v-clicks>
-
----
-
-# CPU Bound: Ejemplos en Go
-
-<v-clicks>
-
-- Procesamiento de imágenes/video
-- Compresión/encriptación
-- Machine Learning inference
-- Análisis de datos grandes
-- Compiladores/parsers
-
-</v-clicks>
-
----
-
-# CPU Bound: Lo que necesitas
-
-<v-clicks>
-
-- **CPUs potentes o múltiples cores**
-- **Memoria para datasets**
-- **Posiblemente GPUs**
-
-</v-clicks>
-
----
-
-# Go y la Concurrencia I/O
-
-<v-clicks>
-
-### Por qué Go brilla en I/O bound
-
-**Goroutines baratas**
-- Solo 2KB de stack inicial
-- Puedes tener 100,000+ goroutines
-- El runtime las multiplexea eficientemente
-
-**Non-blocking I/O nativo**
-- net/http server ya es concurrente
-- database/sql con connection pooling
-- io.Reader/Writer interfaces async-friendly
-
-### El antipatrón
-```go
-// MAL: Bloquea un OS thread completo
-for {
-    conn, _ := listener.Accept()
-    go handleConnection(conn) // BIEN: Goroutine barata
-}
-```
-
-</v-clicks>
-
----
-
-# Decisión I/O Bound: Mejores Opciones
-
-<v-clicks>
-
-**1. Serverless (Lambda, Cloud Run)**
-- Pagas solo cuando procesas
-- Escala automática con requests
-
-**2. PaaS (Heroku, Render)**
-- Múltiples conexiones fácil
-- Connection pooling incluido
-
-**3. Kubernetes con HPA**
-- Autoscaling por requests/segundo
-- Múltiples pods pequeños
-
-</v-clicks>
-
----
-
-# I/O Bound: Configuración Óptima
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div v-click>
-
-### Serverless
-- Memory: 256-512MB
-- Timeout: 30s-5min
-- Concurrency: 1000/inst
-
-</div>
-
-<div v-click>
-
-### Containers/VMs
-- vCPUs: 0.5-2
-- RAM: 512MB-2GB
-- Muchas instancias pequeñas
-
-</div>
-
-</div>
-
----
-
-# Decisión CPU Bound: Mejores Opciones
-
-<v-clicks>
-
-**1. VMs con CPU optimizado**
-- EC2 C5/C6 instances
-- GCP C2 machines
-- Azure F-series
-
-**2. Kubernetes con pods grandes**
-- Guaranteed QoS
-- CPU requests = limits
-
-**3. Bare Metal**
-- Para ML training
-- Procesamiento 24/7
-
-</v-clicks>
-
----
-
-# CPU Bound: Configuración Óptima
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div v-click>
-
-### VMs potentes
-- vCPUs: 8-64
-- RAM: 16GB+
-- Storage: SSD NVMe
-
-</div>
-
-<div v-click>
-
-### Go runtime
-- GOMAXPROCS = NumCPU
-- Worker pools sized to cores
-- Parallel algorithms
-
-</div>
-
-</div>
-
----
-
-# CPU Bound: Qué Evitar
-
-<v-clicks>
-
-- Serverless (límites de tiempo)
-- Instancias compartidas
-- Burstable performance
-
-<span v-mark.underline.red>Usa recursos dedicados</span>
-
-</v-clicks>
-
----
-
-# Casos Híbridos: I/O + CPU
-
-<v-clicks>
-
-### Ejemplos comunes
-- API que procesa imágenes on-demand
-- ETL pipeline que transforma datos
-- Servicio de reportes con cálculos pesados
-
-### Estrategia: Separar componentes
-
-**Frontend (I/O bound)** → Serverless/PaaS
-- Recibe requests
-- Valida input
-- Encola trabajos
-
-**Backend (CPU bound)** → VMs/Kubernetes Jobs
-- Procesa en background
-- Workers con CPU dedicado
-- Autoscaling por queue depth
-
-### Arquitectura recomendada
-Cloud Run (API) → Pub/Sub → GKE Jobs (Processing)
-
-</v-clicks>
-
----
-
-# Benchmarking: Conoce tu Aplicación
-
-<v-clicks>
-
-### Herramientas para Go
-
-**pprof** - Profiling nativo
-```bash
-go tool pprof http://localhost:6060/debug/pprof/profile
-```
-Te muestra exactamente dónde gastas CPU
-
-**hey** - Load testing
-```bash
-hey -n 10000 -c 100 http://api.example.com
-```
-Simula carga real para ver comportamiento
-
-**metrics** - Runtime stats
-```go
-runtime.NumGoroutine() // Cuántas goroutines
-runtime.MemStats       // Uso de memoria
-```
-
-### La regla de oro
-> "Mide primero, optimiza después, elige plataforma al final"
-
-</v-clicks>
-
----
-
-# Matriz de Decisión I/O vs CPU
-
-<div class="text-sm mt-4">
-
-| Característica | I/O Bound | CPU Bound | Híbrido |
-|---------------|-----------|-----------|----------|
-| **Serverless** | ⭐⭐⭐⭐⭐ Ideal | ⭐ No recomendado | ⭐⭐⭐ Para frontend |
-| **PaaS** | ⭐⭐⭐⭐ Muy bueno | ⭐⭐ Costoso | ⭐⭐⭐ Posible |
-| **Kubernetes** | ⭐⭐⭐⭐ Flexible | ⭐⭐⭐⭐ Bueno | ⭐⭐⭐⭐⭐ Ideal |
-| **VMs** | ⭐⭐⭐ Funciona | ⭐⭐⭐⭐⭐ Ideal | ⭐⭐⭐⭐ Bueno |
-| **Bare Metal** | ⭐⭐ Overkill | ⭐⭐⭐⭐⭐ Máximo | ⭐⭐⭐ Complejo |
-
-</div>
-
-<v-click>
-
-### Ejemplos de configuración
-
-| Tipo | Plataforma | Config | Costo/mes |
-|------|------------|--------|-----------|
-| **API REST** (I/O) | Cloud Run | 256MB, 0.5 CPU | $0-50 |
-| **Image Processing** (CPU) | EC2 c5.2xlarge | 8 vCPU, 16GB | $250 |
-| **Data Pipeline** (Híbrido) | GKE | 2 + 8 nodes | $500 |
-
-</v-click>
-
----
-
-# Anti-patrones a Evitar
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### Para I/O Bound
-
-<v-clicks>
-
-❌ **No hagas esto**
-- VMs gigantes para APIs simples
-- Reserved instances para tráfico variable
-- Bare metal para microservicios
-
-✅ **Mejor haz esto**
-- Serverless o PaaS
-- Autoscaling agresivo
-- Múltiples instancias pequeñas
-
-</v-clicks>
-
-</div>
-
-<div>
-
-### Para CPU Bound
-
-<v-clicks>
-
-❌ **No hagas esto**
-- Lambda para procesamiento largo
-- Instancias burstable
-- Compartir CPU con I/O
-
-✅ **Mejor haz esto**
-- VMs dedicadas o bare metal
-- CPU optimized instances
-- Worker pools del tamaño de cores
-
-</v-clicks>
-
-</div>
-
-</div>
-
+class: text-center
 ---
 
 # Framework de Decisión
+## Preguntas clave para elegir tu plataforma
 
-### Preguntas clave para decidir
+<v-click>
 
-<v-clicks>
+Responde estas 9 preguntas en orden para encontrar la mejor opción
 
-**1. ¿Cómo es tu tráfico?**
-- Constante 24/7 → IaaS o PaaS
-- Variable/picos → Serverless
-
-**2. ¿Cuánto control necesitas?**
-- Total → IaaS o Bare Metal
-- Mínimo → PaaS o Serverless
-
-**3. ¿Cuántos servicios tienes?**
-- 1-3 servicios → PaaS
-- 10+ servicios → Kubernetes
-
-**4. ¿Qué tipo de aplicación?**
-- API REST → Cloud Run/App Runner
-- Eventos → Lambda/Functions
-- Web tradicional → PaaS
-
-</v-clicks>
+</v-click>
 
 ---
 
-# Factores Clave de Decisión
+# Pregunta 1: ¿Cuál es tu presupuesto?
 
 <div class="grid grid-cols-2 gap-8 mt-8">
 
-<div>
+<div v-click>
 
-## Costo
+### 💸 Presupuesto mínimo
+- **Tráfico bajo o variable**
+- **Comenzando el proyecto**
 
-<v-clicks>
-
-- **Serverless**: Paga por uso real
-- **PaaS**: Costo fijo mensual
-- **IaaS**: Por hora (24/7 = caro)
-- **Bare Metal**: CAPEX alto
-
-</v-clicks>
+→ **Serverless** (Cloud Run, Lambda)
+→ Pay-per-use, free tiers generosos
 
 </div>
 
-<div>
+<div v-click>
 
-## Escalabilidad
+### 💰 Presupuesto establecido
+- **Tráfico constante**
+- **Proyecto en producción**
 
-<v-clicks>
-
-- **Serverless**: Automática e infinita
-- **PaaS**: Semi-automática
-- **Kubernetes**: Configurable
-- **VMs**: Manual o scripted
-
-</v-clicks>
+→ **PaaS** (Heroku, Render) o **VMs reservadas**
+→ Costos predecibles mensuales
 
 </div>
 
@@ -1769,147 +1047,356 @@ runtime.MemStats       // Uso de memoria
 <v-click>
 
 <div class="mt-8 p-4 bg-blue-500 bg-opacity-10 rounded">
-
-### Regla de oro
-
-<span v-mark.circle.orange>"Empieza con la mayor abstracción que cumpla tus requisitos"</span>
-
+💡 **Tip**: Con tráfico < 100 req/min, serverless casi siempre es más barato
 </div>
 
 </v-click>
 
 ---
 
-# Análisis de Costos Reales
+# Pregunta 2: ¿Qué tan variable es tu tráfico?
 
-<div class="mt-8">
+<v-clicks>
 
-| Plataforma | 1K req/día | 100K req/día | 1M req/día |
-|------------|------------|--------------|------------|
-| **Lambda** | $0 | $2 | $20 |
-| **Cloud Run** | $0 | $0 | $15 |
-| **Heroku** | $7 | $7 | $25-250 |
-| **EC2 t3.micro** | $8 | $8 | $8-80* |
-| **EKS (3 nodos)** | $216 | $216 | $216 |
+### 📊 Patrones de tráfico
 
-<div class="text-sm mt-2">*Requiere escalar horizontalmente</div>
+**Muy variable** (0 → 10,000 requests/segundo)
+- Picos impredecibles
+- Eventos virales posibles
+→ **Serverless** escala automáticamente
+
+**Predecible** (100-1000 requests/segundo constante)
+- Carga estable 24/7
+- Crecimiento gradual
+→ **VMs** o **Containers** con auto-scaling
+
+**Intermitente** (pocas horas al día)
+- Jobs programados
+- APIs internas
+→ **Serverless** o **PaaS** con scale-to-zero
+
+</v-clicks>
+
+---
+
+# Pregunta 3: ¿Cuánto control necesitas?
+
+<div class="text-2xl mt-10">
+
+<v-clicks>
+
+**Control total del OS y red**
+→ Bare Metal o IaaS (VMs)
+
+**Control del runtime y configuración**
+→ Containers (Docker, Kubernetes)
+
+**Solo control del código**
+→ PaaS (Heroku, App Engine)
+
+**Mínimo control, máxima simplicidad**
+→ Serverless (Cloud Run, Lambda)
+
+</v-clicks>
+
+</div>
+
+---
+
+# Pregunta 4: ¿Qué experiencia tiene tu equipo?
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<div v-click>
+
+### 👨‍💻 Sin equipo DevOps
+
+- Solo desarrolladores
+- Tiempo limitado para infra
+
+**Recomendación:**
+- PaaS (Heroku, Render)
+- Serverless (Cloud Run)
+- Evitar: Kubernetes, VMs
+
+</div>
+
+<div v-click>
+
+### 🚀 Con equipo DevOps
+
+- Experiencia en infraestructura
+- Pueden mantener sistemas
+
+**Opciones abiertas:**
+- Kubernetes para microservicios
+- IaaS para optimización
+- Hybrid: PaaS + custom
+
+</div>
+
+</div>
+
+---
+
+# Pregunta 5: ¿Dónde están tus usuarios?
+
+<v-clicks>
+
+### 🌍 Distribución geográfica
+
+**Local/Regional** (un país o región)
+- Latencia < 50ms aceptable
+→ **Un datacenter regional** en cualquier plataforma
+
+**Nacional** (todo un país grande)
+- Necesitas baja latencia nacional
+→ **Multi-zona** en una región (AWS/GCP/Azure)
+
+**Global** (usuarios mundiales)
+- Latencia < 20ms requerida
+→ **Edge deployment** (Fly.io, Cloudflare)
+→ **Multi-región** con CDN
+
+</v-clicks>
+
+---
+
+# Pregunta 6: ¿Qué tipo de aplicación es?
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<div v-click>
+
+### API REST / GraphQL
+- Stateless
+- Request-response
+
+**Ideal**: Cloud Run, Lambda, PaaS
+
+</div>
+
+<div v-click>
+
+### WebSockets / Real-time
+- Conexiones persistentes
+- Estado en memoria
+
+**Ideal**: VMs, Containers, Fly.io
+
+</div>
+
+</div>
+
+<div class="grid grid-cols-2 gap-8 mt-4">
+
+<div v-click>
+
+### Background Jobs
+- Procesamiento asíncrono
+- Tareas programadas
+
+**Ideal**: Cloud Functions, Lambda
+
+</div>
+
+<div v-click>
+
+### Monolito tradicional
+- Una sola aplicación
+- Base de datos integrada
+
+**Ideal**: PaaS, VM única
+
+</div>
+
+</div>
+
+---
+
+# Pregunta 7: ¿Necesitas cumplir regulaciones?
+
+<v-clicks>
+
+### 🔒 Requerimientos de compliance
+
+**HIPAA / PCI-DSS / SOC2**
+- Aislamiento estricto
+- Auditoría completa
+→ **VMs dedicadas** o **Bare Metal**
+→ Proveedores certificados (AWS, Azure, GCP)
+
+**GDPR / Data residency**
+- Datos en región específica
+- Control de localización
+→ **Deployment regional** específico
+→ Evitar edge/CDN global automático
+
+**Sin regulaciones especiales**
+→ Cualquier opción es válida
+
+</v-clicks>
+
+---
+
+# Pregunta 8: ¿Cuál es tu velocidad de desarrollo?
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<div v-click>
+
+### 🏃 Desarrollo rápido
+**MVP, Startup, Hackathon**
+
+Necesitas:
+- Deploy en minutos
+- Iteración rápida
+- Zero config
+
+→ **PaaS** (Railway, Render)
+→ **Serverless** (Vercel, Netlify)
+
+</div>
+
+<div v-click>
+
+### 🐢 Desarrollo estable
+**Enterprise, Sistema crítico**
+
+Puedes permitirte:
+- Setup inicial largo
+- Optimización profunda
+- Configuración detallada
+
+→ **Kubernetes**
+→ **IaaS** con IaC
+
+</div>
+
+</div>
+
+---
+
+# Pregunta 9: ¿Qué esperas a largo plazo?
+
+<div class="grid grid-cols-2 gap-8 mt-8">
+
+<div v-click>
+
+### 📈 Alto crecimiento esperado
+**10x-100x en 12 meses**
+
+- Tráfico exponencial
+- De 100 a 1M usuarios
+- Scaling frecuente
+
+**Costo óptimo:**
+- Comenzar con **Serverless**
+- Migrar a **VMs reservadas** al crecer
+- **Kubernetes** para > 100k usuarios
+
+</div>
+
+<div v-click>
+
+### 📊 Crecimiento estable
+**2x-3x anual**
+
+- Predicción confiable
+- Base de usuarios establecida
+- Tráfico 24/7 constante
+
+**Costo óptimo:**
+- **VMs con reservas** (1-3 años)
+- **PaaS con planes anuales**
+- Evitar serverless para alto volumen
+
+</div>
 
 </div>
 
 <v-click>
 
-<div class="mt-8 grid grid-cols-2 gap-4">
-
-<div class="p-4 bg-green-500 bg-opacity-10 rounded">
-**Tráfico variable**: Serverless gana
-</div>
-
-<div class="p-4 bg-orange-500 bg-opacity-10 rounded">
-**Tráfico constante alto**: VMs pueden ser más baratas
-</div>
-
+<div class="mt-8 p-4 bg-red-500 bg-opacity-10 rounded">
+⚠️ **Punto de inflexión**: ~50k requests/día = serverless puede ser más caro que VM dedicada
 </div>
 
 </v-click>
 
 ---
-layout: two-cols
----
 
-# Caso 1: Startup SaaS
 
-## Aplicación B2B
+# Matriz de Decisión Rápida
 
-**Requisitos:**
-- 100-1000 usuarios
-- Necesita escalar rápido
-- Presupuesto limitado
-- Time to market crítico
+<div class="text-sm">
 
-<v-click>
-
-### Solución: PaaS
-
-- Deploy automático desde GitHub
-- Escalamiento elástico incluido  
-- Base de datos como add-on
-- SSL y dominio personalizado incluidos
-
-**Costo**: $19-50/mes
-
-</v-click>
-
-::right::
-
-# Caso 2: E-commerce
-
-## Tienda online
-
-**Requisitos:**
-- Picos en Black Friday
-- Global (baja latencia)
-- Costo-eficiente
-- Alta disponibilidad
-
-<v-click>
-
-### Solución: Cloud Run + CDN
-
-- Google Cloud Run para la API
-- Cloudflare CDN para contenido estático
-- Deploy multi-región automático
-- Scale to zero cuando no hay tráfico
-
-**Costo**: $0-500/mes (por uso)
-
-</v-click>
-
----
-
-# Caso 3: Procesamiento de Datos
-
-<div class="grid grid-cols-2 gap-8">
-
-<div>
-
-## ETL Pipeline
-
-**Requisitos:**
-- Procesa 1TB/día
-- Ejecución programada
-- No necesita estar siempre activo
-
-<v-click>
-
-### Solución: Serverless
-
-- AWS Lambda o Cloud Functions
-- Triggered por eventos o schedule
-- Procesamiento paralelo automático
-- Sin servidores idle
-- Integración nativa con data warehouses
-
-</v-click>
+| Criterio | Serverless | PaaS | Containers | VMs | Bare Metal |
+|----------|------------|------|------------|-----|------------|
+| **Costo inicial** | 💚 Mínimo | 🟡 Bajo | 🟡 Medio | 🟠 Alto | 🔴 Muy alto |
+| **Costo alto volumen** | 🔴 Muy alto | 🟠 Alto | 🟡 Medio | 💚 Bajo | 💚 Mínimo |
+| **Escalabilidad** | 💚 Automática | 🟡 Semi-auto | 🟡 Configurable | 🟠 Manual | 🔴 Física |
+| **Time to market** | 💚 Minutos | 💚 Horas | 🟡 Días | 🟠 Semanas | 🔴 Meses |
+| **Control** | 🔴 Mínimo | 🟠 Limitado | 🟡 Bueno | 💚 Total | 💚 Absoluto |
+| **Complejidad ops** | 💚 Ninguna | 💚 Baja | 🟠 Alta | 🔴 Muy alta | 🔴 Extrema |
+| **Vendor lock-in** | 🔴 Alto | 🟠 Medio | 🟡 Bajo | 💚 Ninguno | 💚 Ninguno |
 
 </div>
 
-<div>
-
 <v-click>
-
-## Comparación de costos
-
-| Opción | Costo Mensual |
-|--------|---------------|
-| **Serverless** | $50 |
-| **VM 24/7** | $300 |
-| **Kubernetes** | $500 |
 
 <div class="mt-4 p-3 bg-green-500 bg-opacity-10 rounded">
-**Ahorro**: 83% vs VM always-on
+💚 = Excelente | 🟡 = Bueno | 🟠 = Regular | 🔴 = Pobre
 </div>
 
 </v-click>
+
+---
+
+# Recomendaciones por Escenario
+
+<div class="grid grid-cols-2 gap-6 text-sm">
+
+<div v-click>
+
+### 🚀 Startup/MVP
+**Objetivo**: Velocidad y bajo costo
+
+1. Comenzar con **Serverless** (Cloud Run)
+2. Si no encaja, usar **PaaS** (Render/Railway)
+3. Migrar a Containers cuando crezcas
+
+</div>
+
+<div v-click>
+
+### 🏢 Empresa establecida
+**Objetivo**: Confiabilidad y control
+
+1. **Kubernetes** para microservicios
+2. **VMs** para apps legacy
+3. **Serverless** para nuevos features
+
+</div>
+
+<div v-click>
+
+### 🎓 Proyecto personal
+**Objetivo**: Aprender y experimentar
+
+1. **Free tiers** (Cloud Run, Railway)
+2. **DigitalOcean** $5/mes
+3. **Oracle Cloud** VMs gratis
+
+</div>
+
+<div v-click>
+
+### 🌍 SaaS Global
+**Objetivo**: Performance mundial
+
+1. **Fly.io** para edge deployment
+2. **Multi-region** en cloud mayor
+3. **CDN** + API en múltiples zonas
 
 </div>
 
@@ -1917,1221 +1404,26 @@ layout: two-cols
 
 ---
 
-# Plataformas Disponibles (2024)
+# Checklist Final de Decisión
 
-<div class="grid grid-cols-4 gap-3 text-sm mt-6">
+<v-clicks>
 
-<div>
+✅ **Antes de elegir, verifica:**
 
-### IaaS/VMs
-- AWS EC2
-- Google Compute
-- Azure VMs
-- DigitalOcean
-- Linode
-- Vultr
+1. ¿El presupuesto permite esta opción a largo plazo?
+2. ¿Tu equipo puede mantener esta solución?
+3. ¿La plataforma soporta tus requisitos técnicos?
+4. ¿Hay vendor lock-in aceptable?
+5. ¿La latencia será adecuada para tus usuarios?
+6. ¿Puedes migrar si necesitas cambiar?
+7. ¿Los costos escalan linealmente con el crecimiento?
 
-</div>
-
-<div>
-
-### PaaS
-- Heroku
-- Render
-- Railway
-- Fly.io
-- Google App Engine
-- Azure App Service
-
-</div>
-
-<div>
-
-### Serverless
-- AWS Lambda
-- Google Cloud Run
-- Azure Functions
-- Vercel
-- Netlify Functions
-- Cloudflare Workers*
-
-</div>
-
-<div>
-
-### Kubernetes
-- AWS EKS
-- Google GKE
-- Azure AKS
-- DigitalOcean K8s
-- IBM Cloud K8s
-- Red Hat OpenShift
-
-</div>
-
-</div>
+</v-clicks>
 
 <v-click>
 
 <div class="mt-8 p-4 bg-yellow-500 bg-opacity-10 rounded">
-*Cloudflare Workers requiere compilar Go a WASM
+⚠️ **Regla de oro**: Empieza simple, migra cuando sea necesario
 </div>
 
 </v-click>
-
----
-
-# Ejemplo Práctico: API REST
-
-<div class="grid grid-cols-2 gap-4">
-
-<div>
-
-## Código Go
-
-### Una simple API Go puede desplegarse en:
-
-<v-clicks>
-
-- **Heroku**: Git push y listo
-- **Cloud Run**: Contenedor serverless
-- **Fly.io**: Deploy global instantáneo
-- **Railway**: Detección automática
-- **AWS Lambda**: Función serverless
-- **VMs**: Máximo control
-
-</v-clicks>
-
-</div>
-
-<div>
-
-## Deploy Options
-
-<v-clicks>
-
-### La elección depende de:
-
-- Presupuesto disponible
-- Experiencia del equipo  
-- Requisitos de escalamiento
-- Necesidades de control
-
-</v-clicks>
-
-</div>
-
-</div>
-
----
-
-# Migración entre Plataformas
-
-### Evolución típica de un proyecto
-
-<v-clicks>
-
-**Fase 1: MVP**
-- Empieza con PaaS o Serverless
-- Enfoque en desarrollo rápido
-- Costos mínimos
-
-**Fase 2: Crecimiento**
-- Considera containers si necesitas más control
-- Evalúa Kubernetes si tienes múltiples servicios
-- Optimiza costos con instancias reservadas
-
-**Fase 3: Madurez**
-- IaaS para optimización máxima
-- Arquitectura híbrida según necesidades
-- Balance entre costo y complejidad
-
-</v-clicks>
-
-<v-click>
-
-<div class="mt-8 grid grid-cols-3 gap-4">
-
-<div class="p-3 bg-blue-500 bg-opacity-10 rounded">
-**Fase 1**: MVP en PaaS
-</div>
-
-<div class="p-3 bg-orange-500 bg-opacity-10 rounded">
-**Fase 2**: Escalar con containers
-</div>
-
-<div class="p-3 bg-red-500 bg-opacity-10 rounded">
-**Fase 3**: Optimizar con IaaS
-</div>
-
-</div>
-
-</v-click>
-
----
-
-# Monitoreo y Observabilidad
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-## Métricas Clave
-
-<v-clicks>
-
-- **Latencia**: P50, P95, P99
-- **Throughput**: Requests/segundo
-- **Error rate**: % de fallos
-- **Costo**: $/request
-
-</v-clicks>
-
-</div>
-
-<div>
-
-## Herramientas por Plataforma
-
-<v-clicks>
-
-- **Serverless**: CloudWatch, Stackdriver
-- **PaaS**: Incluido (Heroku Metrics, etc.)
-- **Kubernetes**: Prometheus + Grafana
-- **VMs**: Datadog, New Relic
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<v-click>
-
-### Integración de monitoreo
-
-- Prometheus + Grafana para Kubernetes
-- CloudWatch para AWS
-- Stackdriver para GCP
-- Application Insights para Azure
-- Datadog/New Relic para cualquier plataforma
-
-</v-click>
-
----
-
-# Manejo de Secretos en Go
-## El problema más crítico en cloud
-
-<v-clicks>
-
-### El desastre más común
-
-**Credenciales en el código = Game Over**
-- Miles de repos con API keys en GitHub
-- Bots escanean constantemente buscando secrets
-- En minutos: crypto-miners usando tu cuenta
-
-### Los números del horror
-- 100,000+ repos con secrets expuestos (GitGuardian 2023)
-- Tiempo promedio de detección por bots: **20 segundos**
-- Costo promedio por incidente: $1.2M
-
-### La regla #1
-> "Si está en git, ya no es un secreto"
-
-</v-clicks>
-
----
-
-# Anatomía de un Desastre de Secretos
-
-<v-clicks>
-
-### Caso real: Uber 2016
-- Credenciales AWS en GitHub privado
-- Hackers accedieron a S3
-- 57 millones de registros expuestos
-- Multa: $148 millones
-
-### Caso real: CircleCI 2023
-- Secretos de clientes comprometidos
-- Todos tuvieron que rotar TODAS las credenciales
-- Impacto: miles de empresas
-
-### El patrón común
-1. Developer comete secreto "temporalmente"
-2. Lo olvida o piensa que el repo es privado
-3. Repo se hace público o es comprometido
-4. Desastre instantáneo
-
-</v-clicks>
-
----
-
-# Manejo de Secretos: Por Plataforma
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### Variables de Entorno
-
-<v-clicks>
-
-**IaaS (VMs)**
-- Archivos .env (NUNCA en git)
-- SystemD environment files
-- Cloud-init user data (encriptado)
-
-**PaaS**
-- Heroku: `heroku config:set`
-- Render: Dashboard UI
-- Railway: Variables en UI
-- Fly.io: `fly secrets set`
-
-</v-clicks>
-
-</div>
-
-<div>
-
-### Servicios Nativos
-
-<v-clicks>
-
-**AWS**
-- Secrets Manager
-- Systems Manager Parameter Store
-- KMS para encriptación
-
-**Google Cloud**
-- Secret Manager
-- Cloud KMS
-
-**Azure**
-- Key Vault
-- Managed Identity
-
-</v-clicks>
-
-</div>
-
-</div>
-
----
-
-# Secretos en Kubernetes
-
-<v-clicks>
-
-### Opciones disponibles
-
-**Kubernetes Secrets nativos**
-- Base64 encoded (NO es encriptación)
-- Almacenados en etcd
-- Necesitan encriptación at rest
-
-**Sealed Secrets**
-- Encriptados que pueden ir en Git
-- Controller los desencripta en cluster
-
-**External Secrets Operator**
-- Sincroniza desde AWS/GCP/Azure
-- Rotación automática
-- Single source of truth
-
-**HashiCorp Vault**
-- Gestión empresarial
-- Rotación dinámica
-- Auditoría completa
-
-</v-clicks>
-
----
-
-# Mejores Prácticas con Go
-
-<v-clicks>
-
-### 1. Nunca hardcodees secretos
-
-❌ **MAL**
-```go
-apiKey := "sk-1234567890abcdef"
-```
-
-✅ **BIEN**
-```go
-apiKey := os.Getenv("API_KEY")
-```
-
-### 2. Usa bibliotecas especializadas
-
-**Viper** - Configuración flexible
-- Lee de ENV, archivos, Consul, etcd
-- Valores por defecto
-- Hot reload de config
-
-**godotenv** - Para desarrollo local
-- Lee archivos .env
-- SOLO para desarrollo
-- .env en .gitignore SIEMPRE
-
-</v-clicks>
-
----
-
-# Patrón de Configuración Segura en Go
-
-<v-clicks>
-
-### Estructura recomendada
-
-1. **Config struct centralizada**
-   - Todos los secretos en un lugar
-   - Validación al inicio
-   - Panic si falta algo crítico
-
-2. **Inicialización temprana**
-   - Cargar en main()
-   - Validar antes de iniciar servidor
-   - Fail fast si hay problemas
-
-3. **Jerarquía de fuentes**
-   - Defaults → Config file → ENV → Secret Manager
-   - ENV siempre gana
-   - Secretos nunca en archivos
-
-4. **Validación estricta**
-   - Verificar formato
-   - Verificar permisos
-   - Verificar conectividad
-
-</v-clicks>
-
----
-
-# Rotación de Secretos
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### Cuándo rotar
-
-<v-clicks>
-
-- **Inmediatamente** si hay exposición
-- **Regularmente** (30-90 días)
-- **Al cambiar personal** con acceso
-- **Después de auditorías**
-
-</v-clicks>
-
-</div>
-
-<div>
-
-### Estrategia de rotación
-
-<v-clicks>
-
-1. Crear nuevo secreto
-2. Actualizar aplicación para aceptar ambos
-3. Desplegar con dual support
-4. Cambiar al nuevo secreto
-5. Remover el viejo
-6. Verificar que todo funciona
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<v-click>
-
-### Automatización
-- AWS Secrets Manager: Rotación automática con Lambda
-- GCP Secret Manager: Versioning automático
-- Vault: Dynamic secrets con TTL
-
-</v-click>
-
----
-
-# Herramientas de Detección
-
-<v-clicks>
-
-### Pre-commit hooks
-**git-secrets** (AWS)
-- Bloquea commits con patterns peligrosos
-- Configurable con regex
-- Prevención en origen
-
-**detect-secrets** (Yelp)
-- Escanea antes de commit
-- Baseline para ignorar falsos positivos
-- Integración con CI/CD
-
-### Scanning continuo
-**GitGuardian**
-- Monitoreo en tiempo real
-- Alertas instantáneas
-- Revocación automática
-
-**TruffleHog**
-- Escanea historia completa de Git
-- Detecta secrets eliminados
-- Verifica si siguen activos
-
-</v-clicks>
-
----
-
-# Ejemplo: Config Segura para Go
-
-<v-clicks>
-
-### Estructura de proyecto
-```
-myapp/
-├── .env.example     # Template con valores fake
-├── .gitignore       # INCLUYE .env
-├── config/
-│   └── config.go    # Carga configuración
-├── main.go
-└── go.mod
-```
-
-### .env.example (SÍ va en Git)
-```
-DATABASE_URL=postgres://user:pass@localhost/db
-API_KEY=your-api-key-here
-JWT_SECRET=your-secret-here
-```
-
-### .env (NUNCA en Git)
-```
-DATABASE_URL=postgres://prod:real@rds.aws/proddb
-API_KEY=sk-real-key-123456
-JWT_SECRET=actual-secret-key
-```
-
-</v-clicks>
-
----
-
-# Checklist: Antes de Hacer Commit
-
-<v-clicks>
-
-- [ ] ¿Ejecuté git-secrets?
-- [ ] ¿El .env está en .gitignore?
-- [ ] ¿No hay IPs/URLs de producción?
-
-</v-clicks>
-
----
-
-# Checklist: Antes de Deployment
-
-<v-clicks>
-
-- [ ] ¿Secretos en secret manager?
-- [ ] ¿Variables de entorno configuradas?
-- [ ] ¿Permisos IAM mínimos?
-
-</v-clicks>
-
----
-
-# Checklist: En Producción
-
-<v-clicks>
-
-- [ ] ¿Rotación automática?
-- [ ] ¿Alertas por acceso?
-- [ ] ¿Logs de auditoría?
-
-</v-clicks>
-
----
-
-# Si Hay una Brecha
-
-<v-clicks>
-
-1. Rotar TODOS los secretos
-2. Auditar logs de 90 días
-3. Notificar a seguridad
-4. Documentar el incidente
-
-<span v-mark.circle.red>ACTUAR RÁPIDO</span>
-
-</v-clicks>
-
----
-
-# Seguridad por Capa
-
-<div class="mt-8">
-
-| Capa | Bare Metal | IaaS | PaaS | Serverless |
-|------|------------|------|------|------------|
-| **Red** | Tú | Tú | Provider | Provider |
-| **OS** | Tú | Tú | Provider | Provider |
-| **Runtime** | Tú | Tú | Provider | Provider |
-| **App** | Tú | Tú | Tú | Tú |
-| **Datos** | Tú | Tú | Tú | Tú |
-
-</div>
-
-<v-click>
-
-<div class="mt-8 grid grid-cols-2 gap-4">
-
-<div class="p-4 bg-yellow-500 bg-opacity-10 rounded">
-**Siempre tu responsabilidad**:
-- Seguridad del código
-- Gestión de secretos
-- Autenticación/Autorización
-</div>
-
-<div class="p-4 bg-green-500 bg-opacity-10 rounded">
-**Mejores prácticas**:
-- Usar variables de entorno
-- Rotar secretos regularmente
-- Principio de menor privilegio
-</div>
-
-</div>
-
-</v-click>
-
----
-
-# Performance: Go en Diferentes Plataformas
-
-<div class="mt-8">
-
-### Cold Start (tiempo de arranque en frío)
-
-<v-clicks>
-
-- **AWS Lambda Go**: 100-200ms
-- **Cloud Run**: 200-500ms 
-- **Heroku**: 1000-3000ms
-- **VM/Kubernetes**: No aplica (siempre activo)
-
-</v-clicks>
-
-<v-click>
-
-### Throughput máximo (requests/segundo)
-
-- **Lambda**: ~1000 por instancia
-- **Cloud Run**: ~1000 por contenedor
-- **PaaS**: 100-500 por dyno
-- **VM optimizada**: 5000-10000+
-
-</v-click>
-
-</div>
-
-<v-click>
-
-<div class="mt-4 p-4 bg-blue-500 bg-opacity-10 rounded">
-**Go advantages**: Compilado, binario único, baja memoria, rápido startup
-</div>
-
-</v-click>
-
----
-
-# ¿Cuándo Usar Serverless?
-
-<v-clicks>
-
-- [ ] Tráfico variable o impredecible
-- [ ] Quieres pagar solo por uso
-- [ ] No tienes equipo DevOps
-- [ ] Necesitas escalar automáticamente
-
-</v-clicks>
-
----
-
-# ¿Cuándo Usar PaaS?
-
-<v-clicks>
-
-- [ ] Necesitas deploy rápido
-- [ ] Tienes presupuesto fijo
-- [ ] Quieres abstracciones simples
-- [ ] Tu app es estándar (web/API)
-
-</v-clicks>
-
----
-
-# ¿Cuándo Usar Kubernetes?
-
-<v-clicks>
-
-- [ ] Tienes muchos microservicios
-- [ ] Necesitas orquestación compleja
-- [ ] Tienes equipo DevOps
-- [ ] Requieres alta personalización
-
-</v-clicks>
-
----
-
-# ¿Cuándo Usar VMs?
-
-<v-clicks>
-
-- [ ] Necesitas control total
-- [ ] Tienes requisitos especiales
-- [ ] Migras sistema legacy
-- [ ] Requieres software específico
-
-</v-clicks>
-
----
-layout: center
-class: text-center
----
-
-# Historias de Terror en la Nube
-## Cuando el costo se sale de control
-
-<div class="text-xl mt-8">
-<v-clicks>
-
-Antes de continuar, veamos algunos casos reales...
-
-...para que no te pase a ti
-
-</v-clicks>
-</div>
-
----
-
-# El Desastre de los $72,000 de Milkie Way
-
-<v-clicks>
-
-### La historia
-**Marzo 2020**: Startup Milkie Way casi quiebra por un error de configuración
-
-### ¿Qué pasó?
-- Desarrollaban un scraper web con Firebase + Cloud Run
-- Crearon recursión infinita accidental (páginas que se enlazaban entre sí)
-- 1000 instancias consultando Firebase cada milisegundo
-
-### Los números del horror
-- **116 mil millones** de lecturas a Firestore en menos de 1 hora
-- **1 mil millones** de requests por minuto en el pico
-- Factura final: **$72,000 USD**
-- Presupuesto configurado: $7 USD
-
-</v-clicks>
-
----
-
-# El Desastre de Milkie Way: Lecciones
-
-<v-clicks>
-
-### Problemas descubiertos
-
-**No hay límites reales de gasto**
-- Los "budgets" solo envían alertas, no detienen el gasto
-- Firebase se auto-actualizó del plan gratuito sin avisar
-
-**Facturación con retraso**
-- GCP tarda 24+ horas en mostrar costos reales
-- Dashboard de Firebase mostraba 42,000 lecturas cuando eran 116 mil millones
-- Diferencia: **86,585,365%** de error
-
-### El final
-- El fundador ya estudiaba capítulos de bancarrota
-- Google perdonó la deuda como "gesto único"
-- Conclusión del fundador: *"Fail fast con cloud es una mala idea"*
-
-</v-clicks>
-
----
-
-# Más Historias de Terror Cloud
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### El Bug Recursivo de AWS Lambda
-
-<v-clicks>
-
-- Función que se triggerea a sí misma
-- Upload a S3 → Lambda → modifica archivo → nuevo upload
-- **Costo overnight**: $4,000-15,000
-- Sin exceder concurrencia de 1
-
-</v-clicks>
-
-</div>
-
-<div>
-
-### Ataques de Crypto-Mining
-
-<v-clicks>
-
-- Credenciales AWS expuestas en GitHub
-- Hackers crean instancias GPU para minar
-- **Casos documentados**: $2,000 - $2.3M
-- Tiempo de detección: días o semanas
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<v-click>
-
-### Pinterest: Sorpresa Navideña
-- Tráfico navideño excedió estimaciones
-- Ya habían pagado $170M por adelantado
-- **Sobrecosto adicional**: $20 millones
-
-</v-click>
-
----
-
-# Por Qué Suceden Estos Desastres
-
-<v-clicks>
-
-### La velocidad del desastre
-- Los costos pueden acumularse en **minutos**
-- Una función recursiva es "la inundación flash de los desastres cloud"
-- Para cuando te enteras, ya es demasiado tarde
-
-### La falta de límites duros
-- AWS, GCP, Azure: ninguno tiene límites de gasto reales
-- Solo "alertas" que llegan cuando ya gastaste
-- Diseñado para "no limitar tu crecimiento"
-
-### El miedo a experimentar
-> "Normalmente aprendo rompiendo cosas. Con AWS no me siento cómodo haciendo eso"
-> — Desarrollador anónimo
-
-### Resultado
-Startups han muerto porque necesitaban salir de AWS pero no podían hacerlo a tiempo
-
-</v-clicks>
-
----
-
-# Caso de Éxito: 37signals
-
-<v-clicks>
-
-- **Empresa**: 37signals (Basecamp, HEY)
-- **Factura cloud 2022**: $3.2 millones/año
-- **Decisión**: Salir completamente de AWS
-
-</v-clicks>
-
----
-
-# La Migración (2023)
-
-<v-clicks>
-
-- 7 aplicaciones de AWS a hardware propio
-- Sin contratar personal adicional
-- Inversión en hardware Dell: **$700,000**
-
-</v-clicks>
-
----
-
-# Resultados Año 1
-
-<v-clicks>
-
-- **Ahorro 2024**: $2 millones
-- **Nueva factura**: $1.3 millones (solo S3)
-- Hardware pagado en el primer año
-
-</v-clicks>
-
----
-
-# Proyección a 5 Años
-
-<v-clicks>
-
-- **Ahorro total**: Más de $10 millones
-- **Reducción de costos**: 60-66%
-
-<span v-mark.highlight.green>ROI excepcional</span>
-
-</v-clicks>
-
----
-
-# Próximo Paso: Salir de S3
-
-<v-clicks>
-
-- Migrar a Pure Storage on-premise
-- Capacidad: 18 petabytes
-- Costo: igual a 1 año de S3
-- **Ahorro anual después**: $1.3M
-
-</v-clicks>
-
----
-
-# La Filosofía de DHH
-
-<v-click>
-
-> "Rentar computadoras es (mayormente) un mal negocio para empresas medianas con crecimiento estable"
-> — DHH, CTO de 37signals
-
-</v-click>
-
----
-
-# ¿Para Quién NO Aplica?
-
-<v-clicks>
-
-- Startups en etapa inicial
-- Empresas con carga muy irregular
-- Proyectos experimentales
-
-</v-clicks>
-
----
-
-# ¿Para Quién SÍ Aplica?
-
-<v-clicks>
-
-- Empresas medianas establecidas
-- Crecimiento predecible
-- Carga estable 24/7
-
-<span v-mark.underline.yellow>37signals lo demostró</span>
-
-</v-clicks>
-
----
-
-# No Hagas Esto
-
-<v-clicks>
-
-- Usar K8s para 1 servicio
-- Optimizar costos prematuramente
-- Ignorar vendor lock-in
-- No planear la migración
-- Subestimar la complejidad
-
-</v-clicks>
-
----
-
-# Mejor Haz Esto
-
-<v-clicks>
-
-- Empieza simple, evoluciona
-- Mide antes de optimizar
-- Usa abstracciones estándar
-- Ten estrategia de salida
-- Considera el TCO completo
-
-</v-clicks>
-
----
-
-# La Regla de Oro
-
-<div class="text-center mt-16">
-
-<span v-mark.underline.red>"La complejidad prematura es la raíz de todos los males"</span>
-
-</div>
-
----
-
-# Mejores Prácticas para Deployment Seguro
-
-<div class="grid grid-cols-2 gap-8 mt-8">
-
-<div>
-
-### Prevención de desastres de costos
-
-<v-clicks>
-
-- Configurar alertas de presupuesto en múltiples niveles
-- Implementar circuit breakers en funciones
-- Usar rate limiting agresivo
-- Auditar permisos IAM regularmente
-- Nunca commitear credenciales
-
-</v-clicks>
-
-</div>
-
-<div>
-
-### Monitoreo proactivo
-
-<v-clicks>
-
-- Dashboards de costo en tiempo real
-- Alertas por anomalías de uso
-- Revisión diaria de gastos
-- Tags para tracking de costos
-- Autoscaling con límites máximos
-
-</v-clicks>
-
-</div>
-
-</div>
-
-<v-click>
-
-### La regla de oro
-
-> "Si no entiendes completamente cómo se cobra un servicio, no lo uses en producción"
-
-</v-click>
-
----
-
-# Optimización: Ganancias Inmediatas
-
-<v-clicks>
-
-- Apagar recursos de desarrollo nocturnos
-- Usar instancias spot
-- Comprimir datos en S3
-- Eliminar snapshots antiguos
-
-</v-clicks>
-
----
-
-# Optimización: Mediano Plazo
-
-<v-clicks>
-
-- Reserved instances para carga base
-- Consolidar cuentas para descuentos
-- Migrar a regiones baratas
-- Auto-scaling eficiente
-
-</v-clicks>
-
----
-
-# Optimización: Largo Plazo
-
-<v-clicks>
-
-- Evaluar repatriación (como 37signals)
-- Negociar contratos enterprise
-- Arquitectura serverless
-- Considerar hybrid cloud
-
-</v-clicks>
-
----
-
-# Platform Engineering: La Tendencia 2024-2025
-
-<v-clicks>
-
-### ¿Qué es Platform Engineering?
-
-Crear plataformas internas de autoservicio que aceleren el desarrollo
-
-### Beneficios documentados
-- **60%** mejor utilización de recursos
-- **45%** reducción en overhead operacional
-- **55%** mayor eficiencia en deployments
-- **35%** reducción en costos operativos
-
-### Componentes clave
-- Portal de autoservicio para developers
-- Templates de infraestructura pre-aprobados
-- CI/CD pipelines estandarizados
-- Observabilidad integrada
-
-### El resultado
-Los desarrolladores se enfocan en código, no en infraestructura
-
-</v-clicks>
-
----
-
-# FinOps: Gestión Financiera del Cloud
-
-<v-clicks>
-
-### Los 3 pilares de FinOps
-
-**Informar**: Visibilidad total de costos
-- Quién gasta qué y por qué
-- Dashboards por equipo/proyecto
-
-**Optimizar**: Reducir desperdicios
-- Rightsizing de recursos
-- Eliminación de recursos idle
-- Uso de descuentos y spots
-
-**Operar**: Governance continuo
-- Políticas de gasto
-- Aprobaciones para recursos costosos
-- Revisiones mensuales de optimización
-
-### Resultado típico
-35% de reducción en gasto cloud en el primer año
-
-</v-clicks>
-
----
-
-# Recursos y Herramientas
-
-<div class="grid grid-cols-3 gap-6 mt-8">
-
-<div>
-
-### Documentación
-- [Go Cloud Development Kit](https://gocloud.dev)
-- [12 Factor App](https://12factor.net)
-- [Cloud Native Go](https://www.oreilly.com/library/view/cloud-native-go/9781492076322/)
-
-</div>
-
-<div>
-
-### Herramientas
-- [ko](https://ko.build/) - Build containers
-- [Skaffold](https://skaffold.dev/) - K8s workflow
-- [Terraform](https://terraform.io) - IaC
-
-</div>
-
-<div>
-
-### Calculadoras
-- [AWS Calculator](https://calculator.aws)
-- [GCP Calculator](https://cloud.google.com/products/calculator)
-- [Azure Calculator](https://azure.microsoft.com/pricing/calculator/)
-
-</div>
-
-</div>
-
-<v-click>
-
-<div class="mt-8 p-4 bg-green-500 bg-opacity-10 rounded">
-**Pro tip**: Usa las calculadoras ANTES de elegir plataforma
-</div>
-
-</v-click>
-
----
-layout: center
-class: text-center
-transition: fade
----
-
-# Conclusiones
-
-<div class="text-2xl mt-8 space-y-4">
-
-<v-clicks>
-
-<div>
-No existe una solución única
-</div>
-
-<div>
-Empieza simple, escala cuando lo necesites
-</div>
-
-<div>
-Considera el costo total (tiempo + dinero)
-</div>
-
-<div>
-Go funciona bien en todas las plataformas
-</div>
-
-</v-clicks>
-
-</div>
-
-<v-click>
-
-<div class="mt-12 p-6 bg-gradient-to-r from-blue-500 to-green-500 bg-opacity-10 rounded-lg">
-<span v-mark.circle.orange class="text-xl">"La mejor arquitectura es la que resuelve tu problema actual, no el que podrías tener"</span>
-</div>
-
-</v-click>
-
----
-layout: center
-class: text-center
-transition: slide-up
----
-
-# ¡Gracias!
-
-## ¿Preguntas?
-
-<div class="mt-12">
-  <a href="https://github.com" target="_blank" class="mx-2">
-    <carbon:logo-github class="text-3xl"/>
-  </a>
-  <a href="https://twitter.com" target="_blank" class="mx-2">
-    <carbon:logo-twitter class="text-3xl"/>
-  </a>
-  <a href="https://linkedin.com" target="_blank" class="mx-2">
-    <carbon:logo-linkedin class="text-3xl"/>
-  </a>
-</div>
-
-<div class="mt-8 text-sm opacity-75">
-Presentación creada con Slidev
-</div>
-
-<style>
-h1 {
-  background-color: #00ADD8;
-  background-image: linear-gradient(45deg, #00ADD8 25%, #5AC8E2 50%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -moz-text-fill-color: transparent;
-}
-</style>
