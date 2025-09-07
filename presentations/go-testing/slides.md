@@ -321,7 +321,8 @@ Sistema moderno de gestión de dependencias
 
 </div>
 
-<v-click>
+
+--- 
 
 <div class="mt-8 grid grid-cols-2 gap-4">
 
@@ -343,7 +344,6 @@ $GOPATH/
 
 </div>
 
-</v-click>
 
 ---
 
@@ -478,27 +478,26 @@ go mod why github.com/pkg/errors
 
 Go usa **Semantic Versioning** con una regla especial:
 
-<div class="mt-6">
 
 ## Formato: `vMAJOR.MINOR.PATCH`
 
 <v-clicks>
 
-- **PATCH** (v1.0.1): Corrección de bugs
-- **MINOR** (v1.1.0): Nueva funcionalidad compatible
-- **MAJOR** (v2.0.0): Cambios incompatibles
+**PATCH** (v1.0.1): Corrección de bugs
+
+**MINOR** (v1.1.0): Nueva funcionalidad compatible
+
+**MAJOR** (v2.0.0): Cambios incompatibles
 
 </v-clicks>
 
-</div>
 
-<v-click>
+---
 
 ## Regla de Importación Semántica
 
 <span v-mark.circle.red="2">Para v2+, el número de versión es parte del path</span>
 
-</v-click>
 
 <v-click>
 
@@ -635,19 +634,20 @@ import "github.com/user/myapp/internal/auth"
 
 </div>
 
-<v-click>
+---
 
 <div class="mt-6 p-4 bg-blue-500 bg-opacity-10 rounded">
 
 ## Ventajas del directorio `internal`
 
-- 🔒 **Encapsulación forzada** por el compilador
-- 🔄 **Libertad para refactorizar** sin romper usuarios externos
-- 📚 **API pública clara** - solo lo que no está en `internal`
+- **Encapsulación forzada** por el compilador
+- **Libertad para refactorizar** sin romper usuarios externos
+- **API pública clara** - solo lo que no está en `internal`
 
 </div>
 
-</v-click>
+Nota: esto es una convención, no un mecanismo.
+
 
 ---
 
@@ -660,7 +660,6 @@ taskmaster/
 │   │   └── main.go
 │   └── migrate/        # Herramienta de migraciones
 │       └── main.go
-│
 ├── internal/
 │   ├── handler/        # HTTP handlers
 │   │   ├── task.go
@@ -672,11 +671,9 @@ taskmaster/
 │       ├── postgres/
 │       │   └── task.go
 │       └── interface.go
-│
 ├── pkg/
 │   ├── validator/      # Validaciones reutilizables
 │   └── middleware/     # Middleware HTTP genérico
-│
 ├── migrations/         # Scripts SQL
 ├── docker-compose.yml
 └── Makefile
@@ -699,7 +696,7 @@ Calidad integrada en el lenguaje
 
 <div class="text-center mb-8">
 
-> "El testing no es opcional, es fundamental"
+> El testing es fundamental para crear software de calidad
 
 </div>
 
@@ -804,9 +801,15 @@ func TestAdd(t *testing.T) {
 
 </v-clicks>
 
-<v-click>
+</div>
+
+</div>
+
+---
 
 ## Ejecutar Tests
+
+<v-clicks>
 
 ```bash
 # Todos los tests
@@ -822,11 +825,7 @@ go test -run TestAdd
 go test -cover
 ```
 
-</v-click>
-
-</div>
-
-</div>
+</v-clicks>
 
 ---
 
@@ -894,11 +893,8 @@ func TestLuhnValidate(t *testing.T) {
         expected bool
     }{
         {"valid visa", "4532015112830366", true},
-        {"valid mastercard", "5425233430109903", true},
         {"invalid number", "1234567890123456", false},
-        {"empty string", "", false},
         {"with spaces", "4532 0151 1283 0366", true},
-        {"with dashes", "4532-0151-1283-0366", true},
         {"single digit", "5", false},
         {"invalid characters", "4532a15112830366", false},
     }
@@ -1168,7 +1164,7 @@ total:                              (statements) 78.5%
 
 <div class="mt-4 p-3 bg-green-500 bg-opacity-10 rounded">
 
-💡 **Meta:** Apunta a >80% de cobertura
+💡 **Meta:** Apunta a >80% de cobertura, pero no lo consideres obligatorio
 
 </div>
 
@@ -1193,19 +1189,15 @@ func FuzzLuhnValidate(f *testing.F) {
         "4532015112830366",
         "5425233430109903",
         "371449635398431",
-        "",
         "invalid",
     }
-    
     for _, tc := range testcases {
         f.Add(tc)
     }
-    
     // Función de fuzzing
     f.Fuzz(func(t *testing.T, input string) {
         // No debe entrar en pánico
         result := Validate(input)
-        
         // Propiedad: resultado consistente
         result2 := Validate(input)
         if result != result2 {
@@ -1245,741 +1237,23 @@ ls testdata/fuzz/FuzzLuhnValidate/
 
 </v-click>
 
-<v-click>
-
-<div class="mt-4 p-3 bg-yellow-500 bg-opacity-10 rounded">
-
-🔍 Fuzzing es excelente para encontrar casos no previstos
-
-</div>
-
-</v-click>
-
-</div>
-
-</div>
-
----
-layout: center
-class: text-center
----
-
-# Proyecto Práctico
-
-## Implementación del Algoritmo de Luhn
-
-<div class="mt-8 text-lg opacity-90">
-Validación de tarjetas de crédito con testing completo
-</div>
-
----
-
-# El Algoritmo de Luhn
-
-Algoritmo de checksum usado para validar números de tarjetas de crédito:
-
-<div class="grid grid-cols-2 gap-6 mt-6">
-
-<div>
-
-## Pasos del Algoritmo
-
-<v-clicks>
-
-1. **Duplicar** dígitos alternos (desde la derecha)
-2. Si resultado > 9, **restar 9**
-3. **Sumar** todos los dígitos
-4. Válido si suma es **múltiplo de 10**
-
-</v-clicks>
-
-<v-click>
-
-## Ejemplo: `4532015112830366`
-
-```text
-4 5 3 2 0 1 5 1 1 2 8 3 0 3 6 6
-↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
-4 10 3 4 0 2 5 2 1 4 8 6 0 6 6 12
-↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
-4 1 3 4 0 2 5 2 1 4 8 6 0 6 6 3
-                              = 50 ✓
-```
-
-</v-click>
-
-</div>
-
-<div>
-
-## Casos de Uso
-
-<v-clicks>
-
-- Validación de tarjetas de crédito
-- Detección de errores de tipeo
-- Verificación de IMEI (móviles)
-- Números de cuenta bancaria
-
-</v-clicks>
-
-<v-click>
-
-## Estructura del Proyecto
-
-```text
-luhn-validator/
-├── go.mod
-├── go.sum
-├── luhn.go
-├── luhn_test.go
-├── benchmark_test.go
-├── example_test.go
-└── README.md
-```
-
-</v-click>
-
 </div>
 
 </div>
 
 ---
 
-# Implementación: luhn.go
+# Ejercicio
 
-```go {all|1-7|9-18|20-35|all} {maxHeight:'400px'}
-// Package luhn implements the Luhn algorithm for validation
-package luhn
+Implementa el algoritmo de Luhn en Go, usando las pruebas como guía.
+Puedes primero estudiar el código de este repositorio: [Algoritmo de Luhn](https://github.com/hectorip/cf-bcgo-luhn-validator)
 
-import (
-    "strings"
-    "unicode"
-)
+Si eres avanzado, investígalo e implementalo desde cero.
 
-// Validate checks if a string passes the Luhn algorithm
-func Validate(number string) bool {
-    // Clean the input: remove spaces and dashes
-    cleaned := strings.ReplaceAll(number, " ", "")
-    cleaned = strings.ReplaceAll(cleaned, "-", "")
-    
-    // Check minimum length and all digits
-    if len(cleaned) <= 1 {
-        return false
-    }
-    
-    for _, r := range cleaned {
-        if !unicode.IsDigit(r) {
-            return false
-        }
-    }
-    
-    return checksum(cleaned)
-}
 
-// checksum performs the Luhn algorithm
-func checksum(number string) bool {
-    sum := 0
-    double := false
-    
-    // Process from right to left
-    for i := len(number) - 1; i >= 0; i-- {
-        digit := int(number[i] - '0')
-        
-        if double {
-            digit *= 2
-            if digit > 9 {
-                digit -= 9
-            }
-        }
-        
-        sum += digit
-        double = !double
-    }
-    
-    return sum%10 == 0
-}
-```
-
----
-
-# Tests Unitarios: luhn_test.go
-
-```go {all|1-7|9-28|30-38|all} {maxHeight:'400px'}
-package luhn
-
-import (
-    "testing"
-)
-
-func TestValidate(t *testing.T) {
-    tests := []struct {
-        name     string
-        number   string
-        expected bool
-    }{
-        // Casos válidos
-        {"valid Visa", "4532015112830366", true},
-        {"valid MasterCard", "5425233430109903", true},
-        {"valid Amex", "371449635398431", true},
-        {"with spaces", "4532 0151 1283 0366", true},
-        {"with dashes", "4532-0151-1283-0366", true},
-        
-        // Casos inválidos
-        {"invalid checksum", "4532015112830367", false},
-        {"single digit", "5", false},
-        {"empty string", "", false},
-        {"only spaces", "   ", false},
-        {"letters", "4532a15112830366", false},
-        {"special chars", "4532@151#1283$366", false},
-    }
-    
-    for _, tt := range tests {
-        t.Run(tt.name, func(t *testing.T) {
-            result := Validate(tt.number)
-            if result != tt.expected {
-                t.Errorf("Validate(%q) = %v, want %v",
-                        tt.number, result, tt.expected)
-            }
-        })
-    }
-}
-
-func TestChecksum(t *testing.T) {
-    // Test de la función interna
-    testCases := []struct {
-        number   string
-        expected bool
-    }{
-        {"4532015112830366", true},
-        {"5425233430109903", true},
-        {"371449635398431", true},
-        {"1234567890123456", false},
-    }
-    
-    for _, tc := range testCases {
-        result := checksum(tc.number)
-        if result != tc.expected {
-            t.Errorf("checksum(%q) = %v, want %v",
-                    tc.number, result, tc.expected)
-        }
-    }
-}
-```
-
----
-
-# Benchmarks: benchmark_test.go
-
-```go {all|1-9|11-24|26-42|all}
-package luhn
-
-import (
-    "testing"
-)
-
-func BenchmarkValidate(b *testing.B) {
-    for i := 0; i < b.N; i++ {
-        Validate("4532015112830366")
-    }
-}
-
-func BenchmarkValidateWithSpaces(b *testing.B) {
-    for i := 0; i < b.N; i++ {
-        Validate("4532 0151 1283 0366")
-    }
-}
-
-func BenchmarkValidateInvalid(b *testing.B) {
-    for i := 0; i < b.N; i++ {
-        Validate("1234567890123456")
-    }
-}
-
-func BenchmarkValidateSizes(b *testing.B) {
-    sizes := []struct {
-        name   string
-        number string
-    }{
-        {"15digits", "371449635398431"},
-        {"16digits", "4532015112830366"},
-        {"19digits", "6011000990139424543"},
-        {"withSpaces", "4532 0151 1283 0366"},
-        {"withDashes", "4532-0151-1283-0366"},
-    }
-    
-    for _, size := range sizes {
-        b.Run(size.name, func(b *testing.B) {
-            for i := 0; i < b.N; i++ {
-                Validate(size.number)
-            }
-        })
-    }
-}
-```
-
----
-
-# Tests de Ejemplo: example_test.go
-
-```go
-package luhn_test
-
-import (
-    "fmt"
-    "github.com/user/luhn-validator"
-)
-
-func ExampleValidate() {
-    // Validar una tarjeta Visa
-    valid := luhn.Validate("4532015112830366")
-    fmt.Println(valid)
-    // Output: true
-}
-
-func ExampleValidate_withSpaces() {
-    // Los espacios son ignorados
-    valid := luhn.Validate("4532 0151 1283 0366")
-    fmt.Println(valid)
-    // Output: true
-}
-
-func ExampleValidate_invalid() {
-    // Número inválido
-    valid := luhn.Validate("1234567890123456")
-    fmt.Println(valid)
-    // Output: false
-}
-```
-
-<v-click>
-
-<div class="mt-4 p-4 bg-blue-500 bg-opacity-10 rounded">
-
-💡 **Los tests de ejemplo** aparecen en la documentación y se ejecutan como tests
-
-</div>
-
-</v-click>
-
----
-
-# Fuzzing Test
-
-```go
-func FuzzValidate(f *testing.F) {
-    // Agregar casos semilla
-    testcases := []string{
-        "4532015112830366",
-        "5425233430109903",
-        "371449635398431",
-        "",
-        "invalid",
-        "1234567890123456",
-        "4532 0151 1283 0366",
-    }
-    
-    for _, tc := range testcases {
-        f.Add(tc)
-    }
-    
-    f.Fuzz(func(t *testing.T, input string) {
-        // No debe entrar en pánico
-        result := Validate(input)
-        
-        // Verificar consistencia
-        result2 := Validate(input)
-        if result != result2 {
-            t.Errorf("Resultados inconsistentes para %q", input)
-        }
-        
-        // Si es válido, verificar propiedades
-        if result {
-            // Debe tener al menos 2 dígitos
-            digitCount := 0
-            for _, r := range input {
-                if r >= '0' && r <= '9' {
-                    digitCount++
-                }
-            }
-            if digitCount <= 1 {
-                t.Errorf("Validó con %d dígitos: %q", digitCount, input)
-            }
-        }
-    })
-}
-```
-
----
-
-# README.md del Proyecto
-
-```markdown {all|1-10|12-24|26-35|37-51|all} {maxHeight:'400px'}
-# Luhn Validator
-
-Implementación del algoritmo de Luhn en Go para validación de tarjetas de crédito.
-
-## Instalación
-
-```bash
-go get github.com/user/luhn-validator
-```
-
-## Uso
-
-```go
-package main
-
-import (
-    "fmt"
-    "github.com/user/luhn-validator"
-)
-
-func main() {
-    if luhn.Validate("4532015112830366") {
-        fmt.Println("Tarjeta válida")
-    }
-}
-```
-
-## Ejecutar Tests
-
-```bash
-# Tests unitarios
-go test
-
-# Con cobertura
-go test -cover
-
-# Ver detalles
-go test -v
-```
-
-## Ejecutar Benchmarks
-
-```bash
-# Todos los benchmarks
-go test -bench=.
-
-# Con información de memoria
-go test -bench=. -benchmem
-
-# Guardar resultados
-go test -bench=. > bench.txt
-```
-
-## Ejecutar Fuzzing
-
-```bash
-# Fuzzing por 30 segundos
-go test -fuzz=FuzzValidate -fuzztime=30s
-```
-
-## Estructura del Proyecto
-
-```
-.
-├── go.mod          # Definición del módulo
-├── luhn.go         # Implementación principal
-├── luhn_test.go    # Tests unitarios
-├── benchmark_test.go # Benchmarks
-├── example_test.go # Ejemplos ejecutables
-└── README.md       # Documentación
-```
-
-## Algoritmo
-
-El algoritmo de Luhn es un checksum simple usado para validar números de identificación:
-
-1. Desde la derecha, duplicar cada segundo dígito
-2. Si el resultado > 9, restar 9
-3. Sumar todos los dígitos
-4. El número es válido si la suma es múltiplo de 10
-
-## Licencia
-
-MIT
-```
-
----
-
-# Makefile para el Proyecto
-
-```makefile
-.PHONY: test bench coverage clean help
-
-# Default target
-all: test
-
-# Ejecutar tests
-test:
-	@echo "🧪 Ejecutando tests..."
-	@go test -v -race ./...
-
-# Ejecutar benchmarks
-bench:
-	@echo "📊 Ejecutando benchmarks..."
-	@go test -bench=. -benchmem
-
-# Generar cobertura
-coverage:
-	@echo "📈 Generando reporte de cobertura..."
-	@go test -coverprofile=coverage.out
-	@go tool cover -html=coverage.out -o coverage.html
-	@echo "✅ Reporte generado: coverage.html"
-
-# Fuzzing
-fuzz:
-	@echo "🎲 Ejecutando fuzzing por 30s..."
-	@go test -fuzz=FuzzValidate -fuzztime=30s
-
-# Limpiar archivos generados
-clean:
-	@echo "🧹 Limpiando..."
-	@rm -f coverage.out coverage.html
-	@rm -rf testdata/fuzz
-
-# Verificar formato
-fmt:
-	@echo "🎨 Verificando formato..."
-	@gofmt -l -w .
-
-# Análisis estático
-vet:
-	@echo "🔍 Ejecutando go vet..."
-	@go vet ./...
-
-# CI: todo lo necesario para CI/CD
-ci: fmt vet test coverage
-
-# Ayuda
-help:
-	@echo "Comandos disponibles:"
-	@echo "  make test     - Ejecutar tests"
-	@echo "  make bench    - Ejecutar benchmarks"
-	@echo "  make coverage - Generar cobertura"
-	@echo "  make fuzz     - Ejecutar fuzzing"
-	@echo "  make clean    - Limpiar archivos"
-	@echo "  make fmt      - Formatear código"
-	@echo "  make vet      - Análisis estático"
-	@echo "  make ci       - Pipeline CI completo"
-```
-
----
-
-# GitHub Actions CI/CD
-
-```yaml
-name: CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        go-version: [1.20, 1.21]
-    
-    steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: ${{ matrix.go-version }}
-    
-    - name: Cache Go modules
-      uses: actions/cache@v3
-      with:
-        path: ~/go/pkg/mod
-        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-    
-    - name: Download dependencies
-      run: go mod download
-    
-    - name: Format check
-      run: |
-        if [ "$(gofmt -s -l . | wc -l)" -gt 0 ]; then
-          echo "Please run 'go fmt ./...'"
-          exit 1
-        fi
-    
-    - name: Vet
-      run: go vet ./...
-    
-    - name: Test
-      run: go test -v -race -coverprofile=coverage.out ./...
-    
-    - name: Coverage
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.out
-    
-    - name: Benchmark
-      run: go test -bench=. -benchmem
-```
-
----
-layout: center
-class: text-center
----
-
-# Mejores Prácticas
-
----
-
-# Principios del Testing Efectivo
-
-<div class="grid grid-cols-2 gap-8">
-
-<div>
-
-## ✅ DO
-
-<v-clicks>
-
-- **Test comportamiento, no implementación**
-- **Nombres descriptivos** para tests
-- **Table-driven tests** para múltiples casos
-- **Subtests** para organización
-- **Benchmarks** para código crítico
-- **Fuzzing** para encontrar edge cases
-- **CI/CD** automatizado
-
-</v-clicks>
-
-</div>
-
-<div>
-
-## ❌ DON'T
-
-<v-clicks>
-
-- **No ignores** tests que fallan
-- **Evita sleeps** - usa sincronización
-- **No compartas estado** entre tests
-- **No olvides** casos límite
-- **No hardcodees** valores esperados
-- **No te saltes** `go mod tidy`
-- **No ignores** warnings del linter
-
-</v-clicks>
-
-</div>
-
-</div>
-
----
-
-# Estructura de Testing por Capas
-
-<div class="text-center mb-6">
-
-```mermaid {scale: 0.8}
-graph TD
-    A[Unit Tests] --> B[Integration Tests]
-    B --> C[E2E Tests]
-    D[Benchmarks] --> E[Performance Tests]
-    F[Fuzz Tests] --> G[Security Tests]
-    
-    style A fill:#4ade80
-    style B fill:#60a5fa
-    style C fill:#a78bfa
-    style D fill:#fbbf24
-    style E fill:#fb923c
-    style F fill:#f87171
-    style G fill:#ef4444
-```
-
-</div>
-
-<div class="grid grid-cols-3 gap-4 text-sm">
-
-<div>
-
-### Base: Unit Tests
-- Rápidos y aislados
-- Mayor cantidad
-- Mock de dependencias
-
-</div>
-
-<div>
-
-### Medio: Integration
-- Componentes reales
-- Base de datos test
-- Menos cantidad
-
-</div>
-
-<div>
-
-### Top: E2E
-- Sistema completo
-- Menor cantidad
-- Más lentos
-
-</div>
-
-</div>
-
----
-layout: center
-class: text-center
----
-
-# Resumen
-
-<div class="grid grid-cols-4 gap-4 mt-8">
-  <div class="border border-green-400 rounded p-4">
-    <div class="text-3xl mb-2">📦</div>
-    <div class="font-bold">Paquetes</div>
-    <div class="text-sm opacity-75">Organización clara</div>
-  </div>
-  <div class="border border-blue-400 rounded p-4">
-    <div class="text-3xl mb-2">🔧</div>
-    <div class="font-bold">Módulos</div>
-    <div class="text-sm opacity-75">Gestión moderna</div>
-  </div>
-  <div class="border border-purple-400 rounded p-4">
-    <div class="text-3xl mb-2">🏗️</div>
-    <div class="font-bold">Estructura</div>
-    <div class="text-sm opacity-75">Patrones probados</div>
-  </div>
-  <div class="border border-orange-400 rounded p-4">
-    <div class="text-3xl mb-2">🧪</div>
-    <div class="font-bold">Testing</div>
-    <div class="text-sm opacity-75">Calidad integrada</div>
-  </div>
-</div>
-
-<v-click>
-
-<div class="mt-8 text-2xl">
-
-**Go hace que escribir buen código y tests sea el camino fácil**
-
-</div>
-
-</v-click>
-
----
-layout: center
-class: text-center
 ---
 
 # ¡Gracias!
-
-## ¿Preguntas?
 
 <div class="mt-8">
 
@@ -1997,15 +1271,9 @@ class: text-center
 🔗 **Código del proyecto:**
 
 ```bash
-git clone https://github.com/user/luhn-validator
-cd luhn-validator
+git clone https://github.com/hectorip/cf-bcgo-luhn-validator
+cd cf-bcgo-luhn-validator
 make test
 ```
-
-</div>
-
-<div class="mt-6 text-sm opacity-75">
-
-Presentación creada con [Slidev](https://sli.dev)
 
 </div>
